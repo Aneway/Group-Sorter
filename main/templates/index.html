@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
+    <title>Sorteador</title>
+</head>
+<body>
+    <div class="supergraphic"></div>
+    <header>
+        <div class="list">
+            <img src="../static/img/bosch_icon.png">            
+        </div>
+    </header>
+    <!-- <h1>Sorteador</h1> -->
+    <div class="box">
+        <h1>Sorter Group</h1>
+        <h5 style="font-size:12px">Create random teams and groups from a list of participants.</h5>
+        <br>
+        <form method="post" action="/"> {% csrf_token %}
+            <label>Title</label>
+            <input type="text" 
+                name="titulo_input" 
+                id="nome_data" 
+                placeholder="Ex: Hackaton Project" 
+                value="" 
+                class="form-input" 
+                required/>
+
+            <label>Names</label>
+            <!-- <input type="text" name="nome_data" id="nome_data" placeholder="Type a name.." value="" class="form-input"/> -->
+            <textarea name="nomes_input"
+                    placeholder="Obs: Separate the name of each participant with a comma" 
+                    cols="30" rows="9" class="form-input" id="nomes_grupo"
+                    required></textarea>
+
+            <!-- <select class="form-input">
+                <option value="2">2 equipes</option>
+                <option value="3">3 equipes</option>
+                <option value="4">4 equipes</option>
+                <option value="5">5 equipes</option>
+                <option value="6">6 equipes</option>
+                <option value="7">7 equipes</option>
+                <option value="8">8 equipes</option>
+                <option value="9">9 equipes</option>
+                <option value="10">10 equipes</option>
+                <option value="11">11 equipes</option>
+                <option value="12">12 equipes</option>
+                <option value="13">13 equipes</option>
+                <option value="14">14 equipes</option>
+                <option value="15">15 equipes</option>
+                <option value="16">16 equipes</option>
+                <option value="17">17 equipes</option>
+                <option value="18">18 equipes</option>
+                <option value="19">17 equipes</option>
+                <option value="20">18 equipes</option>
+            </select> -->
+            <label>Set the number of groups</label>
+            <br>
+            <input type="button" onclick="remQtd()" value="-" class="btn"/>
+            <input name="qtdGroups_input" id="numberGroups" value="2" class="form-input-qtd" style="font-size: 15px; text-align: center;"/>
+            <input type="button" onclick="addQtd()" value="+" class="btn"/>
+            <br>
+            <div class="btnForm">
+                <button type="submit" style="
+                            background: none;
+                            border: 2px solid #858584;
+                            border-radius:35px;
+                            cursor:pointer;
+                            color:#858584;
+                            font-family:Arial;
+                            font-size:15px;
+                            font-weight:bold;
+                            padding:15px 30px;
+                            text-decoration:none;">Sort Groups</button>
+
+                <button onclick="clearInput()" style="
+                            background: #BE0004;
+                            border: none;
+                            border-radius:35px;
+                            cursor:pointer;
+                            color:white;
+                            font-family:Arial;
+                            font-size:15px;
+                            font-weight:bold;
+                            padding:15px 30px;
+                            text-decoration:none;">Clear</button>
+            </div>
+            <!-- {%for index,value in showGrups.0.items%}
+                <div class="card">
+                    <div class="container">
+                    <h4><b>GROUP {{index}}</b></h4>
+                    {% for p in value %}
+                        <p>{{p}}</p>
+                    {%endfor%}
+                    </div>
+                </div>
+            {%endfor%} -->
+                    
+            <!-- {%for index,value in showGrups.0.items%}
+                    <p>GRUPO {{index}}:{{value}}</p>
+            {%endfor%} -->
+        </form>
+
+        <script>
+            function addQtd(){   
+                var value = parseInt(document.getElementById('numberGroups').value, 10);
+                value = isNaN(value) ? 0 : value;
+                value++;
+                document.getElementById('numberGroups').value = value;
+            }
+            function remQtd(){   
+                var value = parseInt(document.getElementById('numberGroups').value, 10);
+                if (value <= 2){
+                    alert('Only two or more groups allowed!')
+                    
+                }else{
+                    value = isNaN(value) ? 0 : value;
+                    value--;
+                    document.getElementById('numberGroups').value = value;
+                }
+            }
+            function clearInput(){
+                document.querySelector("#nome_data").value = ""
+                document.querySelector("#nomes_grupo").value = ""
+                document.querySelector("#numberGroups").value = "2"
+            }
+        </script>
+        
+    </div>
+</body>
+</html>

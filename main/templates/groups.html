@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
+    <title>Sorteador</title>
+</head>
+<body>
+    <div class="supergraphic"></div>
+    <header>
+        <div class="list">
+            <img src="../static/img/bosch_icon.png">            
+        </div>
+    </header>
+    <!-- <h1>Sorteador</h1> -->
+    <div class="box">
+        <h1>{{titulo}}</h1>
+        <div class="div_card">
+            {%for index,value in showGrups.0.items%}
+                <div class="div_card">
+                    <div class="card">
+                    <h4 style="font-size: 35px; text-align: start;"><b>{{index}}</b></h4>
+                    {% for p in value %}
+                        <p>{{p}}</p>
+                    {%endfor%}
+                    </div>
+                </div>
+            {%endfor%}
+        </div>
+        <a href="{% url 'index' %}">
+            <button style="background: #04AA6D;
+                           border: none;
+                           border-radius:35px;
+                           cursor:pointer;
+                           color:white;
+                           font-family:Arial;
+                           font-size:15px;
+                           font-weight:bold;
+                           padding:15px 30px;
+                           text-decoration:none;">Sort again</button>
+        </a>    
+    </div>
+</body>
+</html>
